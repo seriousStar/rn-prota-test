@@ -1,7 +1,7 @@
 import Storage from "./storageModel";
 
 class LocalStorage {
-  static saveName = async (name) => {
+  static addName = async (name) => {
     try {
       let currentNames = [];
       const names = await this.getNames();
@@ -10,7 +10,8 @@ class LocalStorage {
       } else {
         currentNames.push(name);
       }
-      await Storage.setJSON("babyNames");
+      await Storage.setJSON("babyNames", currentNames);
+      return currentNames;
     } catch (e) {
       console.info("e saveName", e);
     }
