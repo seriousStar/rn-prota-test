@@ -12,7 +12,7 @@ class LocalStorage {
       }
       await Storage.setJSON("babyNames");
     } catch (e) {
-      console.info("e setAppleInfo", e);
+      console.info("e saveName", e);
     }
   };
   static getNames = async () => {
@@ -20,7 +20,7 @@ class LocalStorage {
     try {
       result = await Storage.getJSON("babyNames");
     } catch (e) {
-      console.info("e getAppleInf", e);
+      console.info("e getNames", e);
     }
     return result;
   };
