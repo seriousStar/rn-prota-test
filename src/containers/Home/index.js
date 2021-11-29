@@ -4,6 +4,7 @@ import { styles } from "./styles";
 import { NameInput, NameList } from "../../components";
 import { NameData } from "./dummy";
 import { withHome } from "../../redux/containers";
+import FlashMessage from "react-native-flash-message";
 
 const HomeScreen = (props) => {
   const onAddName = (name) => {
@@ -23,6 +24,7 @@ const HomeScreen = (props) => {
     <SafeAreaView style={styles.container}>
       <NameInput onAdd={onAddName} />
       <NameList data={props.nameListData} />
+      <FlashMessage position="top" />
     </SafeAreaView>
   );
 };
