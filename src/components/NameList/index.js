@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   FlatList,
   StyleSheet,
@@ -35,14 +35,39 @@ const styles = StyleSheet.create({
     textAlign: "right",
     color: Colors.gray,
   },
+  text: {},
+  crossedText: {
+    textDecorationStyle: "solid",
+    textDecorationLine: "line-through",
+    fontStyle: "italic",
+  },
 });
 
 const NameList = ({ data }) => {
+  const [crossedNames, setCrossedNames] = useState([]);
+
+  const onPress = (itemIndex) => {
+    const index = crossedNames.indexOf(itemIndex);
+    if (index === -1) {
+      setCrossedNames([...crossedNames, itemIndex]);
+    } else {
+      const updatedCrossedNames = [...crossedNames];
+      updatedCrossedNames.splice(index, 1);
+      setCrossedNames(updatedCrossedNames);
+    }
+  };
+
   const renderItem = ({ item, index }) => {
-    const date = new Date(item.date)
+    const date = new Date(item.date);
+    const textStyle =
+      crossedNames.indexOf(index) === -1 ? styles.text : styles.crossedText;
     return (
-      <TouchableOpacity style={styles.itemContainer} activeOpacity={0.8}>
-        <Text>{item.name}</Text>
+      <TouchableOpacity
+        style={styles.itemContainer}
+        activeOpacity={0.8}
+        onPress={() => onPress(index)}
+      >
+        <Text style={textStyle}>{item.name}</Text>
         <View style={styles.dateContainer}>
           <Text style={styles.dateTimeText}>
             {moment(date).format("hh:mm:ss")}
