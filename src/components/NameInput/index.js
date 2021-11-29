@@ -37,7 +37,10 @@ const NameInput = ({ onAdd }) => {
         value={name}
         onChangeText={setName}
       />
-      <TouchableOpacity style={styles.addBtn} onPress={() => onAdd(name)}>
+      <TouchableOpacity
+        style={styles.addBtn}
+        onPress={() => onAdd(name.trim())}
+      >
         <Text>Add</Text>
       </TouchableOpacity>
     </View>
