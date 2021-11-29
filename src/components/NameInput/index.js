@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const styles = StyleSheet.create({
   inputText: {
@@ -30,18 +29,9 @@ const styles = StyleSheet.create({
 
 const NameInput = ({ onAdd }) => {
   const [name, setName] = useState("");
-  const onPress = () => {
-    const trimmedName = name.trim();
-    if (trimmedName === "") {
-      return showMessage({
-        message: "Please try again with the valid name.",
-        description: "You're trying to add the blank name.",
-        type: "danger",
-        hideOnPress: true,
-      });
-    }
-    onAdd(trimmedName);
-  };
+
+  const onPress = () => onAdd(name);
+
   return (
     <View style={styles.inputContainer}>
       <TextInput
