@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
+import { Colors } from "../../themes";
 
 const styles = StyleSheet.create({
   inputText: {
@@ -38,6 +39,7 @@ const NameInput = ({ onAdd }) => {
         style={styles.inputText}
         placeholder="Add new baby name"
         value={name}
+        placeholderTextColor={Colors.gray}
         onChangeText={setName}
       />
       <TouchableOpacity style={styles.addBtn} onPress={onPress}>
