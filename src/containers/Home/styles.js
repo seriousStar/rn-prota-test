@@ -6,4 +6,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.white,
   },
+  dropdown: {
+    marginHorizontal: 10
+  }
 });

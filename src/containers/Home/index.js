@@ -1,14 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import FlashMessage, { showMessage } from "react-native-flash-message";
 
+import { SortOptions } from "../../constants";
 import { styles } from "./styles";
-import { NameInput, NameList } from "../../components";
+import { NameInput, NameList, SortBy } from "../../components";
 import { NameData } from "./dummy";
 import { withHome } from "../../redux/containers";
 import { validateName } from "../../helpers";
 
 const HomeScreen = (props) => {
+  const [sortBy, setSortBy] = useState(null);
+
   const onAddName = (name) => {
     const trimmedName = name.trim();
     if (trimmedName === "") {
@@ -45,7 +48,9 @@ const HomeScreen = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <NameInput onAdd={onAddName} />
-      <NameList data={props.nameListData} />
+
+      <SortBy options={SortOptions} setOption={setSortBy} />
+      <NameList data={props.nameListData} sortBy={sortBy} />
       <FlashMessage position="top" />
     </SafeAreaView>
   );

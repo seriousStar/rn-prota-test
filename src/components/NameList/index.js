@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import _ from "lodash";
 import DraggableFlatList, {
   ScaleDecorator,
   useOnCellActiveAnimation,
 } from "react-native-draggable-flatlist";
 import moment from "moment";
 import { Colors } from "../../themes";
+import { SortOptions } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,15 +43,34 @@ const styles = StyleSheet.create({
   },
 });
 
-const NameList = ({ data }) => {
+const NameList = ({ data, sortBy }) => {
   const [crossedNames, setCrossedNames] = useState([]);
   const [listData, setListData] = useState(data || []);
 
   useEffect(() => {
     if (data) {
-      setListData(data);
+      onUpdateList();
     }
-  }, [data]);
+  }, [data, sortBy]);
+
+  const onUpdateList = () => {
+    let sortedData = [];
+    switch (sortBy) {
+      case SortOptions[0].value: // Alphabetical
+        sortedData = _.sortBy(data, [(o) => o.name]);
+        break;
+      case SortOptions[1].value: // By Input Time
+        sortedData = _.sortBy(data, [(o) => o.date]);
+        break;
+      case SortOptions[2].value: // By Length
+        sortedData = _.sortBy(data, [(o) => o.name.length]);
+        break;
+      default:
+        sortedData = data;
+        break;
+    }
+    setListData(sortedData);
+  };
 
   const onPress = (itemIndex) => {
     const index = crossedNames.indexOf(itemIndex);
