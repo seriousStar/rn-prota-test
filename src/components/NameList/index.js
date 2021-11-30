@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import {
-  FlatList,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import DraggableFlatList, {
   ScaleDecorator,
   useOnCellActiveAnimation,
@@ -49,6 +43,13 @@ const styles = StyleSheet.create({
 
 const NameList = ({ data }) => {
   const [crossedNames, setCrossedNames] = useState([]);
+  const [listData, setListData] = useState(data || []);
+
+  useEffect(() => {
+    if (data) {
+      setListData(data);
+    }
+  }, [data]);
 
   const onPress = (itemIndex) => {
     const index = crossedNames.indexOf(itemIndex);
@@ -59,6 +60,10 @@ const NameList = ({ data }) => {
       updatedCrossedNames.splice(index, 1);
       setCrossedNames(updatedCrossedNames);
     }
+  };
+
+  const onDragEnd = ({ data }) => {
+    setListData(data);
   };
 
   const renderItem = ({ item, index, drag }) => {
@@ -94,11 +99,12 @@ const NameList = ({ data }) => {
   return (
     <View style={styles.container}>
       <DraggableFlatList
-        data={data}
+        data={listData}
         renderItem={renderItem}
         style={styles.list}
         ItemSeparatorComponent={renderSeparator}
         keyExtractor={(item, index) => `key-${item.id}`}
+        onDragEnd={onDragEnd}
       />
     </View>
   );
