@@ -6,6 +6,10 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import DraggableFlatList, {
+  ScaleDecorator,
+  useOnCellActiveAnimation,
+} from "react-native-draggable-flatlist";
 import moment from "moment";
 import { Colors } from "../../themes";
 
@@ -57,26 +61,31 @@ const NameList = ({ data }) => {
     }
   };
 
-  const renderItem = ({ item, index }) => {
+  const renderItem = ({ item, index, drag }) => {
+    const { isActive } = useOnCellActiveAnimation();
     const date = new Date(item.date);
     const textStyle =
       crossedNames.indexOf(index) === -1 ? styles.text : styles.crossedText;
     return (
-      <TouchableOpacity
-        style={styles.itemContainer}
-        activeOpacity={0.8}
-        onPress={() => onPress(index)}
-      >
-        <Text style={textStyle}>{item.name}</Text>
-        <View style={styles.dateContainer}>
-          <Text style={styles.dateTimeText}>
-            {moment(date).format("hh:mm:ss")}
-          </Text>
-          <Text style={styles.dateTimeText}>
-            {moment(date).format("DD/MM/YYYY")}
-          </Text>
-        </View>
-      </TouchableOpacity>
+      <ScaleDecorator>
+        <TouchableOpacity
+          style={styles.itemContainer}
+          onLongPress={drag}
+          disabled={isActive}
+          activeOpacity={0.8}
+          onPress={() => onPress(index)}
+        >
+          <Text style={textStyle}>{item.name}</Text>
+          <View style={styles.dateContainer}>
+            <Text style={styles.dateTimeText}>
+              {moment(date).format("hh:mm:ss")}
+            </Text>
+            <Text style={styles.dateTimeText}>
+              {moment(date).format("DD/MM/YYYY")}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </ScaleDecorator>
     );
   };
 
@@ -84,7 +93,7 @@ const NameList = ({ data }) => {
 
   return (
     <View style={styles.container}>
-      <FlatList
+      <DraggableFlatList
         data={data}
         renderItem={renderItem}
         style={styles.list}
