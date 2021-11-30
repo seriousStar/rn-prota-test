@@ -6,17 +6,17 @@ import {
   TouchableOpacity,
   TextInput,
 } from "react-native";
-import { Colors } from "../../themes";
+import { Colors, Metrics } from "../../themes";
 
 const styles = StyleSheet.create({
   inputText: {
     flex: 1,
-    paddingHorizontal: 10,
+    paddingHorizontal: Metrics.space.sm,
   },
   inputContainer: {
     flexDirection: "row",
     height: 40,
-    marginHorizontal: 10,
+    marginHorizontal: Metrics.space.sm,
     borderRadius: 5,
     borderWidth: 1,
   },
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 60,
-    marginLeft: 10,
+    marginLeft: Metrics.space.sm,
   },
 });
 

@@ -6,7 +6,7 @@ import DraggableFlatList, {
   useOnCellActiveAnimation,
 } from "react-native-draggable-flatlist";
 import moment from "moment";
-import { Colors } from "../../themes";
+import { Colors, Metrics } from "../../themes";
 import { SortOptions } from "../../constants";
 
 const styles = StyleSheet.create({
@@ -17,18 +17,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.gray,
     height: 55,
-    marginHorizontal: 10,
+    marginHorizontal: Metrics.space.sm,
     borderRadius: 5,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 10,
+    paddingHorizontal: Metrics.space.sm,
     justifyContent: "space-between",
   },
   list: {
-    marginTop: 20,
+    marginTop: Metrics.space.lg,
   },
   separator: {
-    height: 5,
+    height: Metrics.space.xs,
   },
   dateTimeText: {
     fontSize: 11,

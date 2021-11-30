@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 
-import { Colors } from "../../themes";
+import { Colors, Metrics } from "../../themes";
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 10,
-    marginTop: 10,
+    marginHorizontal: Metrics.space.sm,
+    marginTop: Metrics.space.sm,
     zIndex: 10,
     flexDirection: "row",
     alignItems: "center",
   },
   sortContainer: {
     flex: 1,
-    marginLeft: 10,
+    marginLeft: Metrics.space.sm,
   },
   dropdown: {
     height: 40,
