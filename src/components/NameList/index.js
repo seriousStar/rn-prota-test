@@ -73,9 +73,9 @@ const NameList = ({ data, sortBy }) => {
   };
 
   const onPress = (itemIndex) => {
-    const index = crossedNames.indexOf(itemIndex);
+    const index = crossedNames.indexOf(listData[itemIndex].id);
     if (index === -1) {
-      setCrossedNames([...crossedNames, itemIndex]);
+      setCrossedNames([...crossedNames, listData[itemIndex].id]);
     } else {
       const updatedCrossedNames = [...crossedNames];
       updatedCrossedNames.splice(index, 1);
@@ -91,7 +91,7 @@ const NameList = ({ data, sortBy }) => {
     const { isActive } = useOnCellActiveAnimation();
     const date = new Date(item.date);
     const textStyle =
-      crossedNames.indexOf(index) === -1 ? styles.text : styles.crossedText;
+      crossedNames.indexOf(item.id) === -1 ? styles.text : styles.crossedText;
     return (
       <ScaleDecorator>
         <TouchableOpacity
